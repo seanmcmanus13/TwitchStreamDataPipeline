@@ -37,4 +37,27 @@ while True:
             ##engine.dispose()
 
 
+##-------------------------------------------------------------------------------------------------------------------------------------------------
+
+##rough work
+##this code needs to be added to the while loop above
+df1 = pd.DataFrame({"game_name":[]})
+game_names = []
+game_ids = []
+game_viewers = []
+time = []
+##add game_name not in list to the list
+i = 0
+while i < 99 and games[i]['game']['name'] not in game_names:
+    game_names.append(games[i]['game']['name'])
+    game_ids.append(games[i]['game']['id'])
+    game_viewers.append(games[i]['viewers'])
+    i+=1
+curr_time = time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime())
+##add the name to df where it's not in the list
+##add the other items as appropriate to this table or another one
+n=0
+for name in game_names:
+    if name not in list(df1["game_name"]):
+        df1= df1.append({'game_name': name}, ignore_index=True)
 
