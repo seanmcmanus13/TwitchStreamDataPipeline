@@ -40,7 +40,7 @@ while True:
 ##-------------------------------------------------------------------------------------------------------------------------------------------------
 
 ##rough work
-##this code needs to be added to the while loop above
+##this code needs to be added to the while loop above so that these run at fixed intervals to pull new information
 df1 = pd.DataFrame({"game_name":[]})
 game_names = []
 game_ids = []
@@ -61,3 +61,11 @@ for name in game_names:
     if name not in list(df1["game_name"]):
         df1= df1.append({'game_name': name}, ignore_index=True)
 
+df1 = df1.set_index("game_name")
+##add game_id
+for i in range(len(game_dict)):
+    if list(game_dict)[i] in df1.index.tolist():
+        df1.at[list(game_dict)[i],'game_id'] = list(game_dict.values())[i]
+##make seperate df to store view information
+##think about how best to store this data. the goal isnt to store it all in pandas. pandas df is just an intermediary before pushing to sql
+df_views pd.DataFrame()
