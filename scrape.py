@@ -12,7 +12,7 @@ twitch = Twitch(client_ID, secret)
 twitch.authenticate_app([])
 
 ##sql
-##engine = create_engine('postgresql://postgres:FwwBFmleh65qYxKxDVb9@twitchdata.chd4n5ul8muk.us-east-2.rds.amazonaws.com:5432/twitchdata')
+##engine = create_engine('postgresql://URI')
 
 
 #setup dataframe
