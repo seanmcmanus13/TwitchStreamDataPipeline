@@ -51,7 +51,6 @@ i = 0
 while i < 99 and games[i]['game']['name'] not in game_names:
     game_names.append(games[i]['game']['name'])
     game_ids.append(games[i]['game']['id'])
-    game_viewers.append(games[i]['viewers'])
     i+=1
 curr_time = time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime())
 ##add the name to df where it's not in the list
@@ -68,4 +67,16 @@ for i in range(len(game_dict)):
         df1.at[list(game_dict)[i],'game_id'] = list(game_dict.values())[i]
 ##make seperate df to store view information
 ##think about how best to store this data. the goal isnt to store it all in pandas. pandas df is just an intermediary before pushing to sql
-df_views pd.DataFrame()
+##loop to pull game/viewer/time informatione very 60 seconds
+while True:
+    time.sleep(60)
+    curr_time = []
+    name = []
+    game_viewers = []
+    times = []
+    i = 0
+    games = client.games.get_top(100)
+    curr_time = time.strftime("%Y-%m-%d %H:%M:%S",time.gmtime())
+    while i < 99:
+        df_viewers = df_viewers.append(pd.DataFrame({"game_name":[games[i]['game']['name']],"viewers":[games[i]['viewers']],"time":[curr_time]}), ignore_index=True, sort=False)
+        i+=1
