@@ -15,7 +15,11 @@ twitch = Twitch(client_ID, secret)
 twitch.authenticate_app([])
 
 ##sql
-##engine = create_engine('postgresql://URI')
+connection = psycopg2.connect(user="",
+                                  password="",
+                                  host="localhost",
+                                  port="",
+                                  database="twitch_project")
 
 ##check if it's midnight
 def checkIfMidnight():
