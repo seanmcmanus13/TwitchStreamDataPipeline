@@ -2,6 +2,9 @@ from twitchAPI.twitch import Twitch
 import pandas as pd
 import sched, time
 import json
+from datetime import datetime
+import psycopg2
+
 
 ##twitch api input variables
 client_ID = ''
@@ -14,6 +17,11 @@ twitch.authenticate_app([])
 ##sql
 ##engine = create_engine('postgresql://URI')
 
+##check if it's midnight
+def checkIfMidnight():
+    now = datetime.now()
+    seconds_since_midnight = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
+    return seconds_since_midnight == 0
 
 #setup dataframe
 game_data_df = pd.DataFrame(columns = ['',''])
@@ -68,8 +76,12 @@ for i in range(len(game_dict)):
 ##make seperate df to store view information
 ##think about how best to store this data. the goal isnt to store it all in pandas. pandas df is just an intermediary before pushing to sql
 ##loop to pull game/viewer/time informatione very 60 seconds
+
+#Loop will grab data every 5 minutes.
+#After 24 hours, the loop will kick the data to a ____ and delete the pandas dataframe
+
 while True:
-    time.sleep(60)
+    time.sleep(300)
     curr_time = []
     name = []
     game_viewers = []
@@ -80,3 +92,8 @@ while True:
     while i < 99:
         df_viewers = df_viewers.append(pd.DataFrame({"game_name":[games[i]['game']['name']],"viewers":[games[i]['viewers']],"time":[curr_time]}), ignore_index=True, sort=False)
         i+=1
+        if checkIfMidnight():
+            ##kick the df to postgres
+
+            ##reset the pandas df
+            df_viewers = pd.DataFrame({"game_name":[],"viewers":[],"time":[]})
