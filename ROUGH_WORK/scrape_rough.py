@@ -41,6 +41,7 @@ while True:
         ##games[0]['game']['name']
         ##add a new row of data based on the output of client.games.get_top(100)
 
+
     ##add timestamp data to df
         ##add time stamp to that row
     ##push df data to sql
