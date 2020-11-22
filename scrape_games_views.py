@@ -32,7 +32,7 @@ def checkIfMidnight():
 
 ##write to games tables, write to views table
 while True:
-    time.sleep(500)
+    time.sleep(600)
     curr_time = []
     name = []
     game_viewers = []
@@ -54,5 +54,4 @@ while True:
             #if gamename from the views table is not in the games table add it
             #session.connection().connection.set_isolation_level(0)
             #session.execute('INSERT INTO games (game_id, game_name)')
-            #session.connection().connection.set_isolation_level(1) 
-            
+            #session.connection().connection.set_isolation_level(1)
