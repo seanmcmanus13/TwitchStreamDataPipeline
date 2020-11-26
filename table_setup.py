@@ -19,7 +19,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS Games (game_id integer PRIMARY KEY, g
 cursor.execute("CREATE TABLE IF NOT EXISTS Views (id serial PRIMARY KEY,game_id integer, game_name varchar, viewers integer,time timestamp);")
 cursor.execute("CREATE TABLE IF NOT EXISTS Minutes_Viewed (id serial PRIMARY KEY,game_id integer, game_name varchar, minutes_viewed integer,date date);")
 cursor.execute("CREATE TABLE IF NOT EXISTS Publishers (publisher_id serial PRIMARY KEY, game_name varchar,publisher varchar);")
-cursor.execute("CREATE TABLE IF NOT EXISTS Amazon_Best_Sellers (id serial PRIMARY KEY, game_id integer,console varchar, game_name varchar, rank int, time timestamp);")
+cursor.execute("CREATE TABLE IF NOT EXISTS Amazon_Best_Sellers (id serial PRIMARY KEY, console varchar, game_name varchar, price varchar, rank int, time timestamp);")
 connection.commit()
 cursor.close()
 connection.close()

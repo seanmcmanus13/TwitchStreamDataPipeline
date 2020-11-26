@@ -14,17 +14,24 @@ def checkIfMidnight():
     seconds_since_midnight = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
     return seconds_since_midnight == 0
 
-#adapt this framework with scheduling to push this data to postgres once a day
-i=1
-for item in soup.select('.zg-item-immersion'):
-    try:
-        print('----------------------------------------')
-        print(item.select('.p13n-sc-truncate')[0].get_text().strip())
-        print(item.select('.p13n-sc-price')[0].get_text().strip())
-        print(item.select('.a-icon-row i')[0].get_text().strip())
-        print(item.select('.a-icon-row a')[1].get_text().strip())
-        print('Rank: '+ str(i))
-        i+=1
-    except Exception as e:
-        #raise e
-        print('')
+##this isn't finished, check and test this
+sales_query = []
+
+if checkIfMidnight:
+    i=1
+    for item in soup.select('.zg-item-immersion'):
+
+            #print(item.select('.p13n-sc-truncate')[0].get_text().strip())
+            sales_query = 'INSERT INTO amazon_best_sellers (console, game_name, price, rank, time) VALUES (' + 'Playstation 4' + ',' + str(item.select('.p13n-sc-truncate')[0].get_text().strip()) + ',' + str(item.select('.p13n-sc-price')[0].get_text().strip()) + ',' + str(i) + ',' + 'NOW()' + ')'
+            i+=1
+            session.connection().connection.set_isolation_level(0)
+            session.execute(sales_query)
+            session.connection().connection.set_isolation_level(1)  
+            ##print('----------------------------------------')
+            ##print(item.select('.p13n-sc-truncate')[0].get_text().strip())
+            ##print(item.select('.p13n-sc-price')[0].get_text().strip())
+            ##print(item.select('.a-icon-row i')[0].get_text().strip())
+            ##print(item.select('.a-icon-row a')[1].get_text().strip())
+            ##print('Rank: '+ str(i))
+            ##i+=1
+            print('')
