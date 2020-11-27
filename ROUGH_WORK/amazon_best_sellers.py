@@ -16,13 +16,13 @@ def checkIfMidnight():
 
 ##this isn't finished, check and test this
 sales_query = []
-
+##better to script this to have the whole script run once per day, rather run all day long and only execute the code below at midnight. change that in the next update
 if checkIfMidnight:
     i=1
     for item in soup.select('.zg-item-immersion'):
 
             #print(item.select('.p13n-sc-truncate')[0].get_text().strip())
-            sales_query = 'INSERT INTO amazon_best_sellers (console, game_name, price, rank, time) VALUES (' + 'Playstation 4' + ',' + str(item.select('.p13n-sc-truncate')[0].get_text().strip()) + ',' + str(item.select('.p13n-sc-price')[0].get_text().strip()) + ',' + str(i) + ',' + 'NOW()' + ')'
+            sales_query = 'INSERT INTO amazon_best_sellers (console, game_name, price, rank, time) VALUES (' + '\'' + 'Playstation 4' + '\'' + ',' + '\'' + str(item.select('.p13n-sc-truncate')[0].get_text().strip()) + '\'' + ',' + '\'' + str(item.select('.p13n-sc-price')[0].get_text().strip()) + '\'' + ',' + str(i) + ',' + 'NOW()' + ')'
             i+=1
             session.connection().connection.set_isolation_level(0)
             session.execute(sales_query)
