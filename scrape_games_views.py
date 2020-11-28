@@ -45,9 +45,3 @@ while True:
         session.connection().connection.set_isolation_level(1)  
         #df_viewers = df_viewers.append(pd.DataFrame({"game_name":[games[i]['game']['name']],"viewers":[games[i]['viewers']],"time":[curr_time]}), ignore_index=True, sort=False)
         i+=1
-        ##if checkIfMidnight():
-        ##    subprocess.call("best_sellers.py", shell=True)
-            #if gamename from the views table is not in the games table add it
-            #session.connection().connection.set_isolation_level(0)
-            #session.execute('INSERT INTO games (game_id, game_name)')
-            #session.connection().connection.set_isolation_level(1)
