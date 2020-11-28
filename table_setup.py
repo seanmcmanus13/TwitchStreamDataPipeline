@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 connection = psycopg2.connect(user="postgres",
                                   password="PASSWORD",
                                   host="localhost",
-                                  port="?",
+                                  port="",
                                   database="twitch_project")
 #styleguide - field name should be all lowercase. Space between words should contain a _ always.
 #you can probably integrate all the game metadata to sit in one table. no need to overcomplicate this right now
@@ -23,3 +23,4 @@ cursor.execute("CREATE TABLE IF NOT EXISTS Amazon_Best_Sellers (id serial PRIMAR
 connection.commit()
 cursor.close()
 connection.close()
+print('Tables Created')

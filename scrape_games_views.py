@@ -7,6 +7,7 @@ import sched, time
 import psycopg2
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import subprocess
 
 
 ##twitch api input variables
@@ -23,12 +24,6 @@ client = TwitchClient(client_ID)
 db_string = "postgres://postgres:PW@localhost:5432/twitch_project"
 db = create_engine(db_string, pool_pre_ping=True)
 session = sessionmaker(bind=db)()
-
-##function to check if it's midnight, used for daily offloading of data/scheduling of tasks
-def checkIfMidnight():
-    now = datetime.now()
-    seconds_since_midnight = (now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()
-    return seconds_since_midnight == 0
 
 ##write to games tables, write to views table
 while True:
@@ -50,7 +45,8 @@ while True:
         session.connection().connection.set_isolation_level(1)  
         #df_viewers = df_viewers.append(pd.DataFrame({"game_name":[games[i]['game']['name']],"viewers":[games[i]['viewers']],"time":[curr_time]}), ignore_index=True, sort=False)
         i+=1
-        #if checkIfMidnight():
+        ##if checkIfMidnight():
+        ##    subprocess.call("best_sellers.py", shell=True)
             #if gamename from the views table is not in the games table add it
             #session.connection().connection.set_isolation_level(0)
             #session.execute('INSERT INTO games (game_id, game_name)')
