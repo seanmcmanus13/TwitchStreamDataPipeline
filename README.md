@@ -15,3 +15,4 @@ rmation from giantbomb using giantbomb_id
 - Pull search frequency data
 - Find distribution estimates for rank 1-10 of best sellers, develop point system
 - Setup django and web app
+https://medium.com/@9cv9official/creating-a-django-web-application-with-a-postgresql-database-on-windows-c1eea38fe294
