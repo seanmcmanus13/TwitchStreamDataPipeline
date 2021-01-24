@@ -2,6 +2,7 @@
 Twitch Stream Data Pipeline
 
 # TO DO:
+- Fix main views api request to deal with api threshold limits (change, time periods and add retry on fail.)
 - ~~Change game_views scraper to pull the giantbomb_id~~
 - ~~Ingest daily game ranks into DB for PS4.~~
 - Daily_update for minutes viewed (partially complete need to tet)
@@ -13,3 +14,4 @@ rmation from giantbomb using giantbomb_id
 - Pull Twitter sentiment data
 - Pull search frequency data
 - Find distribution estimates for rank 1-10 of best sellers, develop point system
+- Setup django and web app
